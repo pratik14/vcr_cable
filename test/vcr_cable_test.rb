@@ -47,6 +47,16 @@ class VcrCableTest < ActiveSupport::TestCase
     assert VcrCable.config['allow_playback_repeats']
   end
 
+  test 'match_requests_on default will set to uri' do
+    VcrCable.stubs(:config).returns({'match_requests_on' => [:uri]})
+    assert VcrCable.config['match_requests_on'] == [:uri]
+  end
+
+  test 'match_requests_on is overidden when config sets it' do
+    VcrCable.stubs(:config).returns({'match_requests_on' => [:uri, :body]})
+    assert VcrCable.config['match_requests_on'] == [:uri, :body]
+  end
+
   test 'loads FakeWeb or WebMock based on which is installed' do
     VcrCable.stubs(:env).returns('development')
     assert_equal :fakeweb, VcrCable.config['hook_into']

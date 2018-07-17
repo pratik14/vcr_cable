@@ -38,7 +38,7 @@ development:
   hook_into: fakeweb
   cassette_library_dir: development_cassettes
   enable_erb: false
-  allow_playback_repeats: false
+  match_requests_on: [uri]
   allow_http_connections_when_no_cassette: true
   enable_vcr_cable: false
 ```

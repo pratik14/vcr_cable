@@ -10,7 +10,8 @@ module VcrCable
     'development' => {
       'cassette_library_dir' => 'development_cassettes',
       'allow_http_connections_when_no_cassette' => true,
-      'allow_playback_repeats' => false
+      'allow_playback_repeats' => false,
+      'match_requests_on' => ['uri']
     }
   }
 
@@ -19,6 +20,7 @@ module VcrCable
       c.hook_into config['hook_into']
       c.default_cassette_options = {
          :erb => config['enable_erb'],
+         :match_requests_on => config['match_requests_on'],
          :allow_playback_repeats => config['allow_playback_repeats']
       }
       c.cassette_library_dir = config['cassette_library_dir']
